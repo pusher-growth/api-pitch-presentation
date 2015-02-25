@@ -1,6 +1,20 @@
 # Pusher API Pitch Presentation
 
+## Main Goal of Pitch
+
+* Excite
+* Inspire ideas
+* Demonstrate ease & simplicity
+
+## How
+
+* Brief overview of Pusher
+* Examples of use cases
+* Demos with code
+
 ## Script
+
+Here's the basic script to follow. But feel free to make it your own.
 
 ### Prep
 
@@ -87,4 +101,4 @@ channel.bind('user', function(data) {
 
 #### The API Pitch - Now their turn. Click "Start Pitching"
 
-### What's the Prize? Criteria for Prize? Sign up!
+#### What's the Prize? Criteria for Prize? Sign up!
