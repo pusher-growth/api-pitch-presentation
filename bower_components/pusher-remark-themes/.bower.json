@@ -1,0 +1,28 @@
+{
+  "name": "pusher-remark-themes",
+  "authors": [
+    "leggetter <phil@leggetter.co.uk>"
+  ],
+  "description": "Themes used in Pusher remarkjs presentations",
+  "license": "MIT",
+  "ignore": [
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/pusher-growth/pusher-remark-themes.git"
+  },
+  "homepage": "https://github.com/pusher-growth/pusher-remark-themes",
+  "_release": "12fb06fd1c",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "12fb06fd1cc65840f813ad34bd59f7b3865ec036"
+  },
+  "_source": "git://github.com/pusher-growth/pusher-remark-themes.git",
+  "_target": "*",
+  "_originalSource": "pusher-remark-themes"
+}

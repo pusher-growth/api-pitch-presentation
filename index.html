@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pusher - API Pitch</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <link rel="stylesheet" href="./bower_components/pusher-remark-themes/theme.css" />
+  
+  <link rel="stylesheet" href="./css/styles.css" />
+</head>
+<body>
+
+  <textarea id="source">
+    
+    name: lblue
+    layout: true
+    
+    class: bg-light, center, middle
+    
+    ---
+    
+    name: dblue
+    layout: true
+    
+    class: bg-dark, center, middle
+    
+    ---
+    
+    template: dblue
+    layout: false
+    class: title, h1-big, pinkie-list
+    
+    ![](./bower_components/pusher-remark-themes/img/pusher-logos/pusher-slogan-dark.png)
+    
+    * <span class="pitcher_name"></span>
+    * <span class="pitcher_title"></span>
+    * Pusher
+    
+    ???
+    
+    ---
+
+    template: dblue
+    class: bg-contain, pusher-circle
+    background-image: url(img/pusher-circles.png)
+    
+    ???
+    
+    * This is your server
+    * These are your client apps
+    * We sit in the middle
+    * And make it easy to
+      * Push realtime data from your server to one or more clients
+      * Push realtime data between your clients via our service
+    
+    ---
+    
+    template: dblue
+    class: em-text, bg-cover, trans-h
+    background-image: url(img/itv-news-may-2014.png)
+    
+    # Notifications & Signalling
+    
+    ???
+    
+    * Something has happened
+    * Changed
+    * Alert - do something
+    * Notify interested parties
+    * Stock/Ticket/Room count on a page
+    
+    ---
+    
+    class: center, bg-cover, em-text, trans-h, top
+    background-image: url(/img/delighted-app.gif)
+    
+    # Activity Streams
+    
+    ???
+    
+    * a stream of activity
+    * things have - and are - happening
+    * synonymous with social apps
+      * Twitter
+      * Facebook
+      * Google+
+      * News
+      * Sports
+    * What are friends been doing
+    * What's happening here
+    
+    ---
+    
+    template: dblue
+    
+    class: bg-cover, em-text, trans-h
+    background-image: url(/img/senate-election-results.png)
+    
+    # Data Visualizations
+    
+    ---
+    
+    template: lblue
+    class: bg-video, trans-h, em-text
+    
+    # Chat
+    
+    <video id="video" autoplay="true" loop="true">
+      <source src="/img/pie.mp4" type="video/mp4">
+    </video>
+    
+    ???
+    
+    * Realtime assistance
+    * The 101 of realtime
+    * An interactive experience
+    * Real-time matters
+    
+    ---
+    
+    template: dblue
+    class: trans-h, bg-contain
+    background-image: url(/img/atom-pair.gif)
+    
+    # Multi-User Collaboration
+    
+    ???
+    
+    * Google Apps
+    * Sprint.ly
+    * Project management
+    * Cloud 9
+    * TODO: other
+    
+    ---
+    
+    template: lblue
+    class: bg-cover, trans-h
+    background-image: url(img/quizup.png)
+    
+    # Multiplayer Games
+    
+    ---
+    
+    ## Code & Demos
+    
+    * Trigger an event from the server
+    * Subscribe & bind
+    * Trigger events from the client
+    * Live user lists (presence)
+    
+    ---
+    
+    class: h1-big
+    
+    # Show me the code
+    
+    ## Go to: <span class="link pitch_app_url"></span>
+    
+    <div>Online count: <span class="online-users-count"></span></div>
+    
+    ???
+    
+    * On the URL a presence channel will be subscribed to
+    * We'll just use it to get a count of online users
+    * What lang would you like code examples in?
+      * Demo apps should show options: Ruby, PHP, Python, Node.js
+    
+    ---
+    
+    ## Trigger an Event
+    
+    ![](./img/console.png)
+    
+    ???
+    
+    * Write code and trigger event
+    * Have mobile emulator open
+    * Event sent to demo app
+    * Notifications shown
+    * Button shown
+    
+    ---
+    
+    class: live-code
+    
+    ## Subscribe & Bind to Event
+    
+    <button class="btn btn-green btn-large" onclick="showDemoCode('#subscribe-bind')">Demo</button>
+    
+    ???
+    
+    * Subscribe to event that's triggered when demo button is clicked
+    
+    ```
+    var pusher = new Pusher('ddf4525af004daf4ba2a');
+    
+    var notifications = pusher.subscribe('notifications');
+    notifications.bind('user', function(data) {
+      toastr.warning(data.msg, '', {"positionClass": "toast-top-full-width"});
+    });
+    ```
+    
+    ---
+    
+    class: top, code-reveal
+    
+    ## Client events
+    
+    ```js
+    var pusher = new Pusher(KEY);
+    ```
+    --
+    ```js
+    // Subscribe & Authenticate Channel
+    // private-
+    // presence-
+    
+    var channel = pusher.subscribe('private-channel-name');
+    ```
+    --
+    ```js
+    // Trigger "client-" prefixed event
+    
+    channel.trigger('client-event', data);
+    ```
+    
+    See the docs: [pusher.com/docs/private_channels](https://pusher.com/docs/private_channels)
+    
+    ???
+    
+    ---
+    
+    ## Live User Lists (Presence)
+    
+    <button class="btn btn-green btn-large" onclick="liveUserListsDemo(this)">Demo</button>
+    
+    <div id="presence_users"></div>
+    
+    ???
+    
+    * Write code to
+    * Subscribe to presence channel
+    * Bind to events
+    * Update the UI
+    * Trigger an an event to ask users to login
+    * Show users coming online
+    
+    ---
+    
+    ## The API Pitch
+    
+    <button class="btn btn-green btn-large" onclick="startPitching(this)">Start Pitching</button>
+    
+    <div id="presence_pitchers"></div>
+    
+    ???
+    
+    * Trigger event that asks the demo app to swipe to pitch a ball
+    * The harder the pitch the bigger their avatar in the UI
+    
+    ---
+    
+    ## What we just did
+    
+    * Trigger an event from the server
+    * Subscribe & bind
+    * Trigger events from the client
+    * Live user lists (presence)
+    * Had fun?!
+    
+    ---
+    
+    ## Prize & Signup
+    
+    * <span class="pinkie prize_description"></span>
+    * <span class="pinkie">pusher.com/signup</span> - free Sandbox account
+    
+  </textarea>
+  
+  <div id="editor"></div>
+  <div id="editor_controls">
+    <button class="btn btn-green" onclick="execute()">Run</button>
+    <button class="btn btn-red" onclick="hideEditor()">Exit</button>
+  </div>
+  
+  <script src="bower_components/remark/out/remark.js"></script>
+  <script src="//js.pusher.com/2.2/pusher.min.js"></script>
+  
+  <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
+  <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.1.8/ace.js"></script>
+  
+  <script src="./js/config.js"></script>
+  <script src="./js/slides.js"></script>
+    
+<script id="subscribe-bind" type="text/example">
+// Connect using ddf4525af004daf4ba2a
+
+// Subscribe to "notifications" channel
+
+// Bind to "user" event
+
+// Show notification
+toastr.warning(data.msg, '', {"positionClass": "toast-top-full-width"});
+</script>
+
+<script id="presence_code" type="text/example">
+var pusher = new Pusher('ddf4525af004daf4ba2a');
+
+// subscribe to presence-users
+var presence = pusher.subscribe('presence-users');
+
+// bind to events
+presence.bind('pusher:subscription_succeeded', function(members) {
+  members.each(memberAdded);
+});
+
+presence.bind('pusher:member_added', memberAdded);
+presence.bind('pusher:member_removed', memberRemoved);
+
+function memberAdded(member) {
+  $('#presence_users').append(
+    '<img src="' +
+    'http://avatars.io/twitter/' + member.info.twitter_id + '" ' +
+    'class="user user_' + member.info.twitter_id + '" />');
+}
+
+function memberRemoved(member) {
+  $('#presence_users')
+    .find('.user_' + member.info.twitter_id)
+    .remove();
+}
+</script>
+</body>
+</html>

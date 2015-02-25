@@ -1,0 +1,152 @@
+.pusher-circle {
+  background-color: #253941 !important;
+}
+
+.remark-slide-content .link,
+.remark-slide-content a,
+.remark-slide-content a:visited {
+  color: #f4065f;
+}
+
+.remark-slide-content.code {
+  padding: 2em;
+}
+
+#editor {
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
+  z-index: 3;
+  position: absolute;
+}
+
+#editor_controls {
+  bottom:10px;
+  right:10px;
+  z-index: 4;
+  position: absolute;
+}
+
+.btn {
+  position: relative;
+  display: inline-block;
+  padding: 6px 8px 7px;
+  margin-bottom: 0;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1;
+  color: #333;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: top;
+  cursor: pointer;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.btn-large {
+  display: block;
+  width: 100%;
+  padding: 15px 0;
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.btn-red {
+  color: #fff;
+  background-color: #d9534f;
+  border: 1px solid #d9534f;
+}
+
+.btn-green {
+  color: #fff;
+  background-color: #5cb85c;
+  border: 1px solid #5cb85c;
+}
+
+/* Presence */
+
+#presence_users {
+  position: absolute;
+  z-index: 2;
+  top: 20%;
+  left: 20%;
+  width: 60%;
+}
+
+/* hide users that haven't supplied a twitter_id i.e. the presenter */
+.user_undefined {
+  display: none;
+}
+
+.user, .pitcher {
+  width: 75px;
+  height: 75px;
+}
+
+#presence_pitchers {
+  position: absolute;
+  z-index: 2;
+  top: 20%;
+  left: 20%;
+  width: 60%;
+}
+
+.pitcher {
+  overflow: hidden;
+}
+
+.pitcher .mph {
+  position: absolute;
+  bottom: 0;
+  color: #fff;
+  text-align: center;
+  display: block;
+  width: 100%;
+}
+
+.ball {
+  display: inline-block;
+  width: 75px;
+  height: 75px;
+  margin: 0;
+  border-radius: 50%;
+  position: relative;
+  background-size: 100%;  
+}
+
+.ball:before {
+  content: "";
+  position: absolute;
+  top: 1%;
+  left: 5%;
+  width: 90%;
+  height: 90%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 0px, #ffffff, rgba(255, 255, 255, 0) 58%);
+  -webkit-filter: blur(5px);
+  z-index: 2;
+}
+
+.ball:after {
+  content: "";
+  position: absolute;
+  border-radius: 100%;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: radial-gradient(circle at 50% 30%, rgba(245, 237, 48, 0), rgba(200, 190, 20, 0.2) 50%, #575300 100%);
+}
+
+.ball .shadow {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1) 40%, rgba(0, 0, 0, 0) 50%);
+  -webkit-transform: rotateX(90deg) translateZ(-160px);
+  transform: rotateX(90deg) translateZ(-160px);
+  z-index: 1;
+}
