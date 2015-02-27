@@ -141,7 +141,7 @@
     
     ---
     
-    ## Code & Demos
+    ## Code <small>(No Internet = No Demos)</small>
     
     * Trigger an event from the server
     * Subscribe & bind
@@ -150,59 +150,66 @@
     
     ---
     
-    class: h1-big
-    
-    # Show me the code
-    
-    ## Go to: <span class="link pitch_app_url"></span>
-    
-    <div>Online count: <span class="online-users-count"></span></div>
-    
-    ???
-    
-    * On the URL a presence channel will be subscribed to
-    * We'll just use it to get a count of online users
-    * What lang would you like code examples in?
-      * Demo apps should show options: Ruby, PHP, Python, Node.js
-    
-    ---
+    class: code, top, code-reveal
     
     ## Trigger an Event
     
-    ![](./img/console.png)
+    ```js
+    var Pusher = require('pusher');
+    ```
+    --
+    ```js
+    var pusher = new Pusher({appId: ID, key: KEY, secret: SECRET});
+    ```
+    --
+    ```js
+    pusher.trigger('channel-name', 'event-name', {msg: 'Hello'});
+    ```
     
-    ???
+    --
     
-    * Write code and trigger event
-    * Have mobile emulator open
-    * Event sent to demo app
-    * Notifications shown
-    * Button shown
+    It's that easy!
     
     ---
     
-    class: live-code
+    class: code, top, code-reveal
     
     ## Subscribe & Bind to Event
     
-    <button class="btn btn-green btn-large" onclick="showDemoCode('#subscribe-bind')">Demo</button>
+    --
     
-    ???
-    
-    * Subscribe to event that's triggered when demo button is clicked
-    
+    ```js
+    <script src="//js.pusher.com/2.2/pusher.min.js"></script>
     ```
-    var pusher = new Pusher('ddf4525af004daf4ba2a');
+    --
+    ```js
+    <script>
+    // Connect
+    var pusher = new Pusher(KEY);
+    ```
+    --
+    ```js
     
-    var notifications = pusher.subscribe('notifications');
-    notifications.bind('user', function(data) {
-      toastr.warning(data.msg, '', {"positionClass": "toast-top-full-width"});
+    // Subscribe
+    var channel = pusher.subscribe('channel-name');
+    ```
+    --
+    ```js
+    
+    // Bind to event
+    channel.bind('event-name', function(data) {
+    ```
+    --
+    ```js
+      // Handle event - by doing something better than this!
+      document.body.innerText = data.msg;
     });
+    </script>
     ```
     
     ---
     
-    class: top, code-reveal
+    class: code, top, code-reveal
     
     ## Client events
     
@@ -230,41 +237,56 @@
     
     ---
     
-    ## Live User Lists (Presence)
+    class: code, top, code-reveal
     
-    <button class="btn btn-green btn-large" onclick="liveUserListsDemo(this)">Demo</button>
+    ### Live User Lists (Presence)
     
-    <div id="presence_users"></div>
+    ```js
+    var pusher = new Pusher('KEY');
+    ```
+    --
+    ```js
     
-    ???
+    // subscribe to presence- prefixed channel
+    var presence = pusher.subscribe('presence-users');
+    ```
+    --
     
-    * Write code to
-    * Subscribe to presence channel
-    * Bind to events
-    * Update the UI
-    * Trigger an an event to ask users to login
-    * Show users coming online
+    ```js
+    
+    // bind to events
+    presence.bind('pusher:subscription_succeeded', function(members) {
+      // General simple shortcut
+      members.each(memberAdded);
+    });
+    ```
+    --
+    
+    ```js
+    // Bind to added/removed events
+    presence.bind('pusher:member_added', memberAdded);
+    presence.bind('pusher:member_removed', memberRemoved);
+    ```
+    --
+    
+    ```js
+    // handler functions
+    function memberAdded(member) {
+      // show the user is online
+    }
+    
+    function memberRemoved(member) {
+      // show the user is online
+    }
+    ```
     
     ---
     
-    ## The API Pitch
-    
-    <button class="btn btn-green btn-large" onclick="startPitching(this)">Start Pitching</button>
-    
-    <div id="presence_pitchers"></div>
-    
-    ???
-    
-    * Trigger event that asks the demo app to swipe to pitch a ball
-    * The harder the pitch the bigger their avatar in the UI
-    
-    ---
-    
-    ## What we just did
+    ## What we just saw
     
     * Trigger an event from the server
     * Subscribe & bind
-    * Trigger events from the client
+    * Client events
     * Live user lists (presence)
     * Had fun?!
     
@@ -277,62 +299,11 @@
     
   </textarea>
   
-  <div id="editor"></div>
-  <div id="editor_controls">
-    <button class="btn btn-green" onclick="execute()">Run</button>
-    <button class="btn btn-red" onclick="hideEditor()">Exit</button>
-  </div>
-  
   <script src="bower_components/remark/out/remark.js"></script>
-  <script src="//js.pusher.com/2.2/pusher.min.js"></script>
-  
   <script src="./bower_components/jquery/dist/jquery.min.js"></script>
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
-  <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.1.8/ace.js"></script>
   
   <script src="./js/config.js"></script>
   <script src="./js/init.js"></script>
-  <script src="./js/slides.js"></script>
-    
-<script id="subscribe-bind" type="text/example">
-// Connect using ddf4525af004daf4ba2a
-
-// Subscribe to "notifications" channel
-
-// Bind to "user" event
-
-// Show notification
-toastr.warning(data.msg, '', {"positionClass": "toast-top-full-width"});
-</script>
-
-<script id="presence_code" type="text/example">
-var pusher = new Pusher('ddf4525af004daf4ba2a');
-
-// subscribe to presence-users
-var presence = pusher.subscribe('presence-users');
-
-// bind to events
-presence.bind('pusher:subscription_succeeded', function(members) {
-  members.each(memberAdded);
-});
-
-presence.bind('pusher:member_added', memberAdded);
-presence.bind('pusher:member_removed', memberRemoved);
-
-function memberAdded(member) {
-  $('#presence_users').append(
-    '<img src="' +
-    'http://avatars.io/twitter/' + member.info.twitter_id + '" ' +
-    'class="user user_' + member.info.twitter_id + '" />');
-}
-
-function memberRemoved(member) {
-  $('#presence_users')
-    .find('.user_' + member.info.twitter_id)
-    .remove();
-}
-</script>
+  
 </body>
 </html>
