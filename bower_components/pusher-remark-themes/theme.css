@@ -134,10 +134,10 @@ h1, h2, h3, h4 {
 }
 
 .remark-slide-content.bg-dark {
- 
-  background: -o-linear-gradient(right, #2193b0   , #6dd5ed  ); /* For Opera 11.1 to 12.0 */
-  background: -moz-linear-gradient(right, #2193b0   , #6dd5ed  ); /* For Firefox 3.6 to 15 */
-  background: -webkit-linear-gradient(top right, #2193b0   , #6dd5ed  ) !important; /* Standard syntax */
+  background: -o-linear-gradient(right, #2193b0, #6dd5ed  ); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(right, #2193b0, #6dd5ed  ); /* For Firefox 3.6 to 15 */
+  background: -webkit-linear-gradient(top right, #2193b0, #6dd5ed  ); /* Standard syntax */
+  background-color: #2193b0;
   background-repeat: no-repeat;
   -webkit-background-size: cover;
   -moz-background-size: cover;
