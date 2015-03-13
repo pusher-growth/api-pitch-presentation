@@ -12,6 +12,23 @@
   padding: 2em;
 }
 
+p {
+  font-weight: 200;
+}
+
+ul li {
+  font-weight: 200;
+}
+
+h3{
+  font-weight: 200;
+}
+
+#react-life-cycle-events{
+  margin-top: -10px;
+  margin-bottom: -10px;
+}
+
 #editor {
   top: 0px;
   left: 0px;

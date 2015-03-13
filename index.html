@@ -45,125 +45,51 @@
     ???
     
     ---
+    
+    ![](http://moduscreate.com/wp-content/uploads/2014/03/react-opti.png)
+    
+    * Uses a virtual DOM.
+    * Encapsulates UI components.
+    * Whenever a component's state changes, the view re-renders.
+    
+    ---
+    
+    <!-- class: h1-big -->
+    
+    ### React: Life-Cycle Events
+    
+    ```js
+    var Component = React.createClass({
 
-    template: dblue
-    class: bg-contain, pusher-circle
-    background-image: url(./img/pusher-circles.png)
-    
-    ???
-    
-    * This is your server
-    * These are your client apps
-    * We sit in the middle
-    * And make it easy to
-      * Push realtime data from your server to one or more clients
-      * Push realtime data between your clients via our service
-    
-    ---
-    
-    template: dblue
-    class: em-text, bg-cover, trans-h
-    background-image: url(./img/itv-news-may-2014.png)
-    
-    # Notifications & Signalling
-    
-    ???
-    
-    * Something has happened
-    * Changed
-    * Alert - do something
-    * Notify interested parties
-    * Stock/Ticket/Room count on a page
-    
-    ---
-    
-    class: center, bg-cover, em-text, trans-h, top
-    background-image: url(./img/delighted-app.gif)
-    
-    # Activity Streams
-    
-    ???
-    
-    * a stream of activity
-    * things have - and are - happening
-    * synonymous with social apps
-      * Twitter
-      * Facebook
-      * Google+
-      * News
-      * Sports
-    * What are friends been doing
-    * What's happening here
-    
-    ---
-    
-    template: dblue
-    
-    class: bg-cover, em-text, trans-h
-    background-image: url(./img/senate-election-results.png)
-    
-    # Data Visualizations
-    
-    ---
-    
-    template: lblue
-    class: bg-video, trans-h, em-text
-    
-    # Chat
-    
-    <video id="video" autoplay="true" loop="true">
-      <source src="./img/pie.mp4" type="video/mp4">
-    </video>
-    
-    ???
-    
-    * Realtime assistance
-    * The 101 of realtime
-    * An interactive experience
-    * Real-time matters
-    
-    ---
-    
-    template: dblue
-    class: trans-h, bg-contain
-    background-image: url(./img/atom-pair.gif)
-    
-    # Multi-User Collaboration
-    
-    ???
-    
-    * Google Apps
-    * Sprint.ly
-    * Project management
-    * Cloud 9
-    * TODO: other
-    
-    ---
-    
-    template: lblue
-    class: bg-cover, trans-h
-    background-image: url(./img/quizup.png)
-    
-    # Multiplayer Games
-    
-    ---
-    
-    ## Code & Demos
-    
-    * Trigger an event from the server
-    * Subscribe & bind
-    * Trigger events from the client
-    * Live user lists (presence)
-    
-    ---
-    
-    class: h1-big
-    
-    # Show me the code
-    
-    ## Go to: <span class="link pitch_app_url"></span>
-    
-    <div>Online count: <span class="online-users-count"></span></div>
+        getInitialState: function() {
+            return {
+                content: "Hello World"
+            };
+        },
+
+        componentWillMount: function(){
+            // do something before the component renders
+        },
+
+        render: function() {
+            return ( <h1>{this.state.content}</h1> );
+        }
+
+        componentDidMount: function() {
+            // do something after the component renders
+        },
+
+        componentWillUnmount: function() {
+            // do something before the component is destroyed
+        },
+
+    }); 
+
+    React.render(
+        <Component />, 
+        document.getElementById('app'))        
+    }
+    ```
     
     ???
     
@@ -174,10 +100,20 @@
     
     ---
     
-    ## Trigger an Event
+    ## How Does This Work With Realtime Data?
     
-    ![](./img/console.png)
-    
+    * Whenever a Websocket event occurs (e.g. through Pusher, SocketIO, Firebase etc.), set the component's `state`.
+    * React will handle the re-rendering.
+
+    ```js
+        componentDidMount: function(){
+
+            chatRoom.on('new_message', function(message){
+                this.setState({lastMessage: message})
+            });
+
+        },
+    ```
     ???
     
     * Write code and trigger event
@@ -190,9 +126,10 @@
     
     class: live-code
     
-    ## Subscribe & Bind to Event
+    ## Enter ... **The Maze**
+
+    ### \* gif of the maze *
     
-    <button class="btn btn-green btn-large" onclick="showDemoCode('#subscribe-bind')">Demo</button>
     
     ???
     
@@ -211,38 +148,63 @@
     
     class: top, code-reveal
     
-    ## Client events
-    
-    ```js
-    var pusher = new Pusher(KEY);
+    ## Setting Up
+
+    The DOM element we attach the app to.
+    <br>
+    ```html
+    <div id="maze"></div>
     ```
     --
+
+    Attach the React component to the DOM and render.
+
     ```js
-    // Subscribe & Authenticate Channel
-    // private-
-    // presence-
-    
-    var channel = pusher.subscribe('private-channel-name');
+    React.render(
+        <Maze />, 
+        document.getElementById('maze'))        
+    }
     ```
     --
+
+    Create our component.
+
     ```js
-    // Trigger "client-" prefixed event
-    
-    channel.trigger('client-event', data);
-    ```
-    
-    See the docs: [pusher.com/docs/private_channels](https://pusher.com/docs/private_channels)
-    
+    var Maze = React.createClass({
+
+    });
+    ```    
     ???
     
     ---
     
-    ## Live User Lists (Presence)
+    ### Life-Cycle Events: Component.getInitialState
     
-    <button class="btn btn-green btn-large" onclick="liveUserListsDemo(this)">Demo</button>
-    
-    <div id="presence_users"></div>
-    
+    ```js
+
+    var Maze = React.createClass({
+
+        getInitialState: function() {
+            return {
+                squares: []
+            };
+        }
+    );
+    ```
+    ---
+    ### Life-Cycle Events: componentWillMount
+
+    Subscribe to your source of realtime data, e.g. Pusher, SocketIO etc..
+
+    ```js
+    componentWillMount: function() {
+
+      this.pusher = new Pusher("77f6df16945f47c63a1f");
+      this.tiltChannel = this.pusher.subscribe("presence-tilts");
+
+    }
+    ```
+
     ???
     
     * Write code to
@@ -254,11 +216,37 @@
     
     ---
     
-    ## The API Pitch
+    <h3 style="margin-top: -10px">Life-Cycle Events: render</h3>
+
+    ```js
+
+    render: function(){
+
+      var squares = this.state.squares.map(function(square){
+        return (
+
+          <Square x={square.x} 
+                  y={square.y}
+                  colour={square.colour} />
+        );
+      });
+
+      return (
+
+        <Canvas>
+          <BackgroundImage />
+          {squares}
+        </Canvas>
+
+      );
+
+      });
+    }
+
+
+    ```
     
-    <button class="btn btn-green btn-large" onclick="startPitching(this)">Start Pitching</button>
-    
-    <div id="presence_pitchers"></div>
+    <p style="font-size: 22px;">The React way of doing things: have as few stateful components as possible. Stateful owners transfer data to stateless ownees by props.</p>
     
     ???
     
@@ -267,20 +255,37 @@
     
     ---
     
-    ## What we just did
+    <h3 style="margin-top: -100px">Life-Cycle Events: componentDidMount</h3>
     
-    * Trigger an event from the server
-    * Subscribe & bind
-    * Trigger events from the client
-    * Live user lists (presence)
-    * Had fun?!
-    
+    ```js
+
+    componentDidMount: function() {
+
+      tiltChannel.bind('pusher:member_added', function(user){
+        var updatedSquares = this.addSquare(user);
+        this.setState({squares: updatedSquares})
+      });
+
+      tiltChannel.bind('client-tilt', function(user){
+        var updatedSquares = this.moveSquare(user);
+        this.setState({squares: updatedSquares});
+      });
+
+      tiltChannel.bind('pusher:member_removed', function(user){
+        var updatedSquares = this.removeSquare(user);
+        this.setState({squares: updatedSquares})
+      });
+
+    },
+    ```
+
+    <p style="font-size: 22px;">Once the Maze's state has been set, it will rerender the affected components. Squares will be added, moved or removed.</p>
+
     ---
+
+    <h1>Thanks! Now go to:</h1>
     
-    ## Prize & Signup
-    
-    * <span class="pinkie prize_description"></span>
-    * <span class="pinkie">pusher.com/signup</span> - free Sandbox account
+    <h2>pusher-maze.herokuapp.com</h2>
     
   </textarea>
   
