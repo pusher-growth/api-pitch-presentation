@@ -25,7 +25,9 @@ h1, h2, h3, h4 {
   text-align: center;
 }
 
-.remark-slide-content {
+.remark-slide-content, 
+.remark-slide-content a,
+.remark-slide-content a:visited {
   color: white;
 }
 
@@ -42,15 +44,19 @@ h1, h2, h3, h4 {
 .remark-slide .trans-h h1,
 .remark-slide .trans-h h2 {
   background-color: black;
+  padding: 20px 45px;
+  border-radius: 5px;
   text-shadow:2px 2px 2px #000;
-  opacity:0.8;
-  filter:alpha(opacity=80); /* For IE8 and earlier */
+  opacity:0.9;
+  filter:alpha(opacity=90); /* For IE8 and earlier */
 }
 
-.remark-slide .trans-all *{
+.remark-slide .trans-all > *{
   background-color: black;
-  text-shadow:2px 2px 2px #000;
-  opacity:0.8;
+  background-color: rgba(0,0,0,0.6) !important;
+  padding: 20px 45px;
+  border-radius: 5px;
+  color: white;
   filter:alpha(opacity=80); /* For IE8 and earlier */
 }
 
@@ -91,17 +97,14 @@ h1, h2, h3, h4 {
 
 .remark-slide .pinkie {
   color: #f4065f;
-  /*text-shadow:2px 2px 2px #FFFFFF;*/
 }
 
 .remark-slide .pinkie-list ul {
   color: #f4065f;
-  /*text-shadow:2px 2px 2px #FFFFFF;*/
-  font-weight: bolder;
 }
 
-.remark-code, .remark-inline-code {
-  /*font-family: 'Ubuntu Mono';*/
+.remark-code {
+  line-height: 20px;
 }
 
 .remark-slide code {
@@ -124,8 +127,10 @@ h1, h2, h3, h4 {
 }
 
 .remark-slide-content.bg-light {
-  background: url('./img/galaxy_background.png'), -webkit-radial-gradient(center, ellipse cover, #45b1c4 0%,#2f9fb7 100%);
-  background-color: #2f9fb7;
+  background: -o-linear-gradient(right, #2193b0, #6dd5ed  ); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(right, #2193b0, #6dd5ed  ); /* For Firefox 3.6 to 15 */
+  background: -webkit-linear-gradient(top right, #2193b0, #6dd5ed  ); /* Standard syntax */
+  background-color: #2193b0;
   background-repeat: no-repeat;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -134,10 +139,8 @@ h1, h2, h3, h4 {
 }
 
 .remark-slide-content.bg-dark {
-  background: -o-linear-gradient(right, #2193b0, #6dd5ed  ); /* For Opera 11.1 to 12.0 */
-  background: -moz-linear-gradient(right, #2193b0, #6dd5ed  ); /* For Firefox 3.6 to 15 */
-  background: -webkit-linear-gradient(top right, #2193b0, #6dd5ed  ); /* Standard syntax */
-  background-color: #2193b0;
+  background: url('./img/code-back.jpg'), -webkit-radial-gradient(center, ellipse cover, #192B37 0%,#192B37 100%);
+  background-color: #192B37;
   background-repeat: no-repeat;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -166,15 +169,6 @@ h1, h2, h3, h4 {
   text-shadow: 0px 0px 3px #000, -1px -1px #000, 1px 1px #000;
 }
 
-/*.remark-slide-content.em-content h1,
-.remark-slide-content.em-content h2,
-.remark-slide-content.em-content h3,
-.remark-slide-content.em-content .remark-slide-number {
-  background-color: rgba(0,0,0,0.5);
-  
-  padding: 0.5em;
-}*/
-
 .pitcher_info ul li {
   text-align: center;
   font-weight: 300;
@@ -188,10 +182,10 @@ h1, h2, h3, h4 {
   font-size: 1.1em;
 }
 
-.remark-slide ul ul {
+.remark-slide ul ul,
+.remark-slide ul ol {
   display: block;
   font-size: 1em;
-  list-style: none;
 }
 
 .remark-slide .block ul {
@@ -210,6 +204,32 @@ h1, h2, h3, h4 {
   text-transform: uppercase;
 }
 
+/* Title Slide */
+
+.remark-slide .title ul {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.remark-slide .title .speaker {
+  text-transform: uppercase;
+}
+
+.remark-slide .title .speaker-job-title {
+  font-weight: 200;
+  font-size: 0.9em;
+}
+
+.remark-slide .title .speaker-pusher-logo {
+  background-image: url(./img/pusher-logos/pusher-slogan-dark.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 60%;
+  display: inline-block;
+  height: 80px;
+  width: 100%;
+}
+
 .remark-slide .title ul {
   list-style: none;
 }
@@ -225,6 +245,8 @@ h1, h2, h3, h4 {
 .remark-slide .bg-white {
   background-color: #ffffff;
 }
+
+/* Quotes */
 
 blockquote {
   text-align: left;
@@ -249,6 +271,8 @@ blockquote p {
   display: inline;
 }
 
+/* Code reveal - keep space between code blocks to a minimum */
+
 .code-reveal pre {
   margin-top: 0;
   margin-bottom: 0;
@@ -256,10 +280,61 @@ blockquote p {
 
 .code-reveal pre code {
   border-radius: 0;
-  /*padding-bottom: 0 !important;
-  padding-top: 0 !important;*/
+}
+
+/* Bigger code */
+
+body.big-code .remark-code {
+  font-size: 22px;
+  line-height: 28px;
+}
+
+/* Allow for longer and wider content */
+
+.remark-slide-content.long h1,
+.remark-slide-content.long h2,
+.remark-slide-content.long h3,
+.remark-slide-content.long h4 {
+  margin-top: 15px;
+  margin-bottom: 25px;
+}
+
+.remark-slide-content.longer h1,
+.remark-slide-content.longer h2,
+.remark-slide-content.longer h3,
+.remark-slide-content.longer h4 {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.remark-slide-content.wide {
+  padding-left: 0.5em;
+  padding-right: 0.5em;
 }
 
 .remark-slide>.top {
   vertical-align: top;
+}
+
+
+/* Left/Right sections */
+
+.remark-slide .title {
+  padding-left: 1.5em;
+  padding-right: 1.5em;
+}
+
+.remark-slide .left,
+.remark-slide .right {
+  text-align: center;
+}
+
+.remark-slide .left {
+  margin-left: 1em;
+  min-width: 45%;
+}
+
+.remark-slide .right {
+  margin-right: 1em;
+  min-width: 45%;
 }
