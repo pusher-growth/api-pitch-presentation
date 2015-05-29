@@ -10,7 +10,7 @@ var CONFIG = {
     },
     jam: {
       name: 'Jamie',
-      title: 'Growth Engineer'
+      title: 'Developer'
     }
   },
   
