@@ -12,11 +12,13 @@
     encrypted:true,
     authEndpoint: authEndpoint
   });
+  
+  /* Simple online user count - they have the app open */
   var usersOnline = pusher.subscribe('presence-user-count');
   
   function updateUserCount() {
     // debugger;
-    var count = usersOnline.members.count;
+    var count = (usersOnline.members.count - 1);
     console.log(count);
     var els = document.querySelectorAll('.online-users-count');
     Array.prototype.forEach.call(els, function(el) {
@@ -36,6 +38,7 @@
   
   window.triggerNav = privateNav;
   
+  /* Pitching functionality */
   var pitchingEl = jQuery('#presence_pitchers');
   
   var pitchingChannel = pusher.subscribe('presence-pitch');
@@ -69,6 +72,67 @@
     pitcherEl.animate({width: px, height: px, 'z-index': ev.mph});
     pitcherEl.find('.mph').text(ev.mph);
   })
+  
+  /* Count of users who have logged in via Twitter */
+  var twitterChannel = pusher.subscribe('presence-users');
+  twitterChannel.bind('pusher:subscription_succeeded', updateTwitterCount);
+  twitterChannel.bind('pusher:member_added', updateTwitterCount);
+  twitterChannel.bind('pusher:member_removed', updateTwitterCount);
+  
+  function updateTwitterCount() {
+    // debugger;
+    var count = (twitterChannel.members.count -1 );
+    console.log('Twitter users count:', count);
+    var els = document.querySelectorAll('.online-twitter-count');
+    Array.prototype.forEach.call(els, function(el) {
+      el.innerText = count;
+    });
+  }
+  
+  /* To trigger notifications from the client */
+  var clientNotificationsChannel = pusher.subscribe('private-notifications');
+  
+  jQuery('.notifications-form').on('keypress', function(e) {
+    e.stopImmediatePropagation();
+  });
+  
+  jQuery('.notifications-form').on('submit', function(ev) {
+    var formEl = jQuery(ev.target || ev.srcElement);
+    var message = formEl.find('*[name="message"]').val().trim();
+    if(message) {
+      clientNotificationsChannel.trigger('client-success', {msg: message});
+    }
+    ev.preventDefault();
+  });
+  
+  // To show notifications from pitch app users
+  var subscribedToNotifications = false;
+  var notificationsChannel;
+  jQuery('.notifications-btn').on('click', function(ev) {
+    var el = jQuery(ev.target || ev.srcElement);
+    
+    if(!subscribedToNotifications) {
+      notificationsChannel = pusher.subscribe('notifications');
+      
+      // Bind to "user" event
+      notificationsChannel.bind('user', function(data) {
+        toastr.warning(data.msg, '', {"positionClass": "toast-bottom-right"});
+      });
+      
+      subscribedToNotifications = true;
+    }
+    else {
+      pusher.unsubscribe('notifications');
+      subscribedToNotifications = false;
+    }
+    
+    var btnText = subscribedToNotifications? 'Unsubscribe' : 'Subscribe';
+    el.toggleClass('action-unsubscribe');
+    el.text(btnText);
+    
+    triggerNav('notify');
+  });
+  
 })();
 
 (function(){

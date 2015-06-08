@@ -2,15 +2,18 @@ var CONFIG = {
   pitchers: {
     leggetter: {
       name: 'Phil @leggetter',
-      title: 'Head of Devangelsim',
+      title: 'Developer Evangelist',
+      twitter_id: '@leggetter'
     },
     ham: {
       name: 'Hamilton',
-      title: 'Growth Engineer'
+      title: 'Growth Engineer',
+      twitter_id: '@hamchapman'
     },
     jam: {
       name: 'Jamie',
-      title: 'Developer'
+      title: 'Developer',
+      twitter_id: '@JamiePatel'
     }
   },
   
@@ -19,9 +22,9 @@ var CONFIG = {
   },
   
   // Change presentation config here:
-  pitching: 'jam',
+  pitching: 'leggetter',
   
-  pitchAppUrl: 'http://localhost:8000',
+  pitchAppUrl: 'j.mp/yoyo-tokyo',
   
-  prize: 'Something AWESOME'
+  prize: 'Best use of Pusher: GoPros'
 };

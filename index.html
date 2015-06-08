@@ -8,14 +8,16 @@
   <link rel="stylesheet" href="./css/styles.css" />
 </head>
 <body>
+  
+  <div class="user-count-wrapper">
+    <div class="user-count-inner-wrapper">
+      <span class="pitch_app_url"></span> -
+      <span class="online-users-count">0</span> online -
+      <span class="online-twitter-count">0</span> logged in
+    </div>
+  </div>
 
   <textarea id="source">
-    name: lblue
-    layout: true
-    
-    class: bg-light, center, middle
-    
-    ---
     
     name: dblue
     layout: true
@@ -24,9 +26,16 @@
     
     ---
     
-    template: dblue
+    name: lblue
+    layout: true
+    
+    class: bg-light, center, middle
+    
+    ---
+    
+    template: lblue
     layout: false
-    class: title, h1-big, pinkie-list
+    class: title, h1-big
     
     ![](./bower_components/pusher-remark-themes/img/pusher-logos/pusher-slogan-dark.png)
     
@@ -34,7 +43,14 @@
     * <span class="pitcher_title"></span>
     * Pusher
     
+    <span class="pitch-app-banner">Please go to <span class="pitch_app_url"></span></span>
+    
     ???
+    
+    Hi my name is Phil. I work for Pusher.
+    
+    Please go to the URL in this slide (also shown at the top of the slides through-out)
+    since there will be some audience participation during this 5 minute pitch.
     
     ---
 
@@ -44,12 +60,17 @@
     
     ???
     
-    * This is your server
-    * These are your client apps
-    * We sit in the middle
-    * And make it easy to
-      * Push realtime data from your server to one or more clients
-      * Push realtime data between your clients via our service
+    Pusher is a hosted service with APIs and libraries that makes it really easy
+    to add real-time data and functionality to web mobile and IoT applications.
+    
+    We sit between your servers and your client apps as a real-time layer
+    so that any time your server has data it wants to push to connected
+    apps it can. Instantly.
+    
+    Your clients can also send messages to each other via Pusher once your server has
+    authenticated them.
+    
+    Here are some examples of what people are building with Pusher.
     
     ---
     
@@ -61,11 +82,7 @@
     
     ???
     
-    * Something has happened
-    * Changed
-    * Alert - do something
-    * Notify interested parties
-    * Stock/Ticket/Room count on a page
+    Let users know the instant something has happened. That new data is available.
     
     ---
     
@@ -76,16 +93,8 @@
     
     ???
     
-    * a stream of activity
-    * things have - and are - happening
-    * synonymous with social apps
-      * Twitter
-      * Facebook
-      * Google+
-      * News
-      * Sports
-    * What are friends been doing
-    * What's happening here
+    Activity Streams are used in applications such as Twitter, Facebook and Google+.
+    You can add a stream of real-time status or activity updates.
     
     ---
     
@@ -95,6 +104,11 @@
     background-image: url(./img/senate-election-results.png)
     
     # Data Visualizations
+    
+    ???
+    
+    Visualising data can be very powerful. Visualising real-time data can help
+    you see trends and make predictions. Think real-time dashboards.
     
     ---
     
@@ -109,10 +123,8 @@
     
     ???
     
-    * Realtime assistance
-    * The 101 of realtime
-    * An interactive experience
-    * Real-time matters
+    Everybody uses some sort of real-time chat or messenging application. Pusher
+    makes it really easy to add chat to your web and mobile apps.
     
     ---
     
@@ -124,11 +136,9 @@
     
     ???
     
-    * Google Apps
-    * Sprint.ly
-    * Project management
-    * Cloud 9
-    * TODO: other
+    If you've used Google Docs then you're familiar with the power of real-time
+    collaborative apps. Working together to write documents and build solutions
+    can be a very efficient and amazing user experience.
     
     ---
     
@@ -138,14 +148,23 @@
     
     # Multiplayer Games
     
+    ???
+    
+    Pusher is a great fit for real-time multiplayer games.
+    
     ---
     
-    ## Code</small>
+    ## Code & Demos
     
     * Trigger an event from the server
-    * Subscribe & bind
-    * Trigger events from the client
+    * Subscribe to channel & bind to event on the client
+    * Rules for Trigger events from clients
     * Live user lists (presence)
+    
+    ???
+    
+    I'm now going to show you some sample code, and demonstrate a few
+    simple ways you can use Pusher.
     
     ---
     
@@ -154,20 +173,57 @@
     ## Trigger an Event
     
     ```js
-    var Pusher = require('pusher');
+    require 'pusher'
     ```
+    
+    ???
+    
+    This example shows you how easy it is to send a message through Pusher. Since
+    it's the real-time web, we refer to this as "Triggering Events".
+    
+    1. Include the Pusher library in your server code - we have libraries for Ruby, Python, PHP, Node and many more
+    
     --
     ```js
-    var pusher = new Pusher({appId: ID, key: KEY, secret: SECRET});
+    Pusher.app_id = 'PUSHER_APP_ID'
+    Pusher.key = 'PUSHER_APP_KEY'
+    Pusher.secret = 'PUSHER_APP_SECRET'
     ```
+    
+    ???
+    
+    2. Set the credentials for your Pusher application - you get these once you signup for a free account
+    
     --
     ```js
-    pusher.trigger('channel-name', 'event-name', {msg: 'Hello'});
+    channel_name = 'notifications'
+    event_name = 'new-notification'
+    event_data = {msg: 'Hello'}
+    Pusher.trigger(channel_name, event_name, event_data);
     ```
+    
+    ???
+    
+    3. Trigger an event - we use channel names to identify the data and event names to say what's happened to that data e.g. notifications and new-notification
     
     --
     
     It's that easy!
+    
+    --
+    
+    <form class="notifications-form">
+      <select name="message">
+        <option value="今日は">Hello</option>
+        <option value="呪文">Magic</option>
+      </select>
+      <input type="submit" value="Send" class="btn btn-large btn-green" />
+    </form>
+    
+    ???
+    
+    I've got a few options here to trigger events and send them via a server and to
+    your device.
     
     ---
     
@@ -175,49 +231,80 @@
     
     ## Subscribe & Bind to Event
     
+    ???
+    
+    Now that we're triggering data from the server we want to receive the data
+    within our web, mobile or IoT apps and do something with it.
+    
     --
     
     ```js
-    <script src="//js.pusher.com/2.2/pusher.min.js"></script>
+    <script src="//js.pusher.com/3.0/pusher.min.js"></script>
     ```
+    
+    ???
+    
+    1. Include the client library
+    
     --
-    ```js
+    ```html
     <script>
     // Connect
-    var pusher = new Pusher(KEY);
+    var pusher = new Pusher(PUSHER_APP_KEY);
     ```
+    
+    ???
+    
+    2. Connect to Pusher using your Pusher Application Key.
+    
     --
     ```js
     
     // Subscribe
-    var channel = pusher.subscribe('channel-name');
+    var channel = pusher.subscribe('notifications');
     ```
+    
+    ???
+    
+    3. Subscribe to the channel - in this case 'notifications'
+    
     --
     ```js
     
     // Bind to event
-    channel.bind('event-name', function(data) {
+    channel.bind('new-notification', function(data) {
     ```
     --
     ```js
-      // Handle event - by doing something better than this!
-      document.body.innerText = data.msg;
+      // For example...
+      showNotification(data.msg);
     });
     </script>
     ```
+    
+    ???
+    
+    4. Bind to the event and pass in an event handled - our event is called 'new-notification'
+    5. Do something in the handler - e.g. show a notification
+    
+    Next: demo
+    
+    --
+    
+    <button class="btn btn-green btn-large notifications-btn">Subscribe</button>
     
     ---
     
     class: code, top, code-reveal
     
-    ## Client events
+    ## Rules for Trigger events from clients
     
     ```js
     var pusher = new Pusher(KEY);
     ```
     --
     ```js
-    // Subscribe & Authenticate Channel
+    // Subscribe & Authenticate Channels
     // private-
     // presence-
     
@@ -230,25 +317,47 @@
     channel.trigger('client-event', data);
     ```
     
-    See the docs: [pusher.com/docs/private_channels](https://pusher.com/docs/private_channels)
+    **To trigger events from the client (web | mobile) you need to authenticate the channel subscription from your server**
     
     ???
     
+    As well as sending events from the server you can trigger events from client apps. 
+    However, you must first authenticate those apps to do so via your server.
+    
+    Three important things to remember
+    
+    1. The channel name must either be prefixed with `private-` or `presence-`
+    2. You need to authenticate these subscriptions from your server
+    3. The event name must be prefixed with `client-`
+    
     ---
     
-    class: code, top, code-reveal
+    class: code, top, code-reveal, long
     
     #### Live User Lists (Presence)
     
     ```js
     var pusher = new Pusher('KEY');
     ```
+    
+    ???
+    
+    A common requirement in real-time apps is to know who else is online. To have
+    a real-time updating list of friends. Pusher provides this via presence channels.
+
+    1. Connect to Pusher
+    
     --
     ```js
     
     // subscribe to presence- prefixed channel
     var presence = pusher.subscribe('presence-users');
     ```
+    
+    ???
+    
+    2. Subscribe to a presence channel - with a `presence-` channel name
+    
     --
     
     ```js
@@ -259,16 +368,18 @@
       members.each(memberAdded);
     });
     ```
+    
+    ???
+    
+    3. Bind to the succeeded event to get an initial list of online users
+    
     --
     
     ```js
     // Bind to added/removed events
     presence.bind('pusher:member_added', memberAdded);
     presence.bind('pusher:member_removed', memberRemoved);
-    ```
-    --
-    
-    ```js
+
     // handler functions
     function memberAdded(member) {
       // show the user is online
@@ -278,36 +389,42 @@
       // show the user is online
     }
     ```
+    
+    ???
+    
+    4. Bind to added and removed events so you can updated the list as users come online and go offline.
+    
     ---
     
     ## The API Pitch
-
-    http://pusher.ngrok.com
     
-    <!-- <button class="btn btn-green btn-large" onclick="startPitching(this)">Start Pitching</button> -->
+    <button class="btn btn-green btn-large" onclick="startPitching(this)">Start Pitching</button>
     
     <div id="presence_pitchers"></div>
     
     ???
     
-    * Trigger event that asks the demo app to swipe to pitch a ball
-    * The harder the pitch the bigger their avatar in the UI
+    I've given my API Pitch. Now it's your turn.
+    
+    **DEMO**
     
     ---
     
     ## What we just did
     
     * Trigger an event from the server
-    * Subscribe & bind
-    * Trigger events from the client
+    * Subscribe to channel & bind to event on the client
+    * Rules for Trigger events from clients
     * Live user lists (presence)
     
     ---
     
     ## All You Need To Know 
    
-    * Hackathon Guide: http://pusher.github.io/hackathon
-    * <span class="pinkie">pusher.com/signup</span> - free Sandbox account
+    * Hackathon Guide: <span class="linky">pusher.github.io/hackathon</span>
+    * <span class="linky">pusher.com/signup</span> - free Sandbox account
+    * <span class="prize_description"></span>
+    * Tweet me: <span class="twitter_id linky"></span>
   </textarea>
   
   <div id="editor"></div>

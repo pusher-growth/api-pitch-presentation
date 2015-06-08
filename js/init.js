@@ -10,4 +10,5 @@
   jQuery('.pitcher_title').text(pitcher.title);
   jQuery('.pitch_app_url').text(CONFIG.pitchAppUrl);
   jQuery('.prize_description').text(CONFIG.prize);
+  jQuery('.twitter_id').text(pitcher.twitter_id);
 })();
