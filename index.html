@@ -61,14 +61,14 @@
     ???
     
     Pusher is a hosted service with APIs and libraries that makes it really easy
-    to add real-time data and functionality to web mobile and IoT applications.
+    to add real-time data and functionality to web, mobile and IoT applications.
     
     We sit between your servers and your client apps as a real-time layer
     so that any time your server has data it wants to push to connected
-    apps it can. Instantly.
+    apps, it can. Instantly.
     
-    Your clients can also send messages to each other via Pusher once your server has
-    authenticated them.
+    Your clients can also send messages to each other via Pusher. But only once
+    your server has authenticated them.
     
     Here are some examples of what people are building with Pusher.
     
@@ -82,7 +82,7 @@
     
     ???
     
-    Let users know the instant something has happened. That new data is available.
+    Let users know the instant something has happened - that new data is available to them.
     
     ---
     
@@ -94,7 +94,7 @@
     ???
     
     Activity Streams are used in applications such as Twitter, Facebook and Google+.
-    You can add a stream of real-time status or activity updates.
+    You can add a streams of real-time status or activity updates.
     
     ---
     
@@ -107,8 +107,8 @@
     
     ???
     
-    Visualising data can be very powerful. Visualising real-time data can help
-    you see trends and make predictions. Think real-time dashboards.
+    Visualising real-time data can help users see trends and make predictions. 
+    Think real-time dashboards.
     
     ---
     
@@ -137,8 +137,8 @@
     ???
     
     If you've used Google Docs then you're familiar with the power of real-time
-    collaborative apps. Working together to write documents and build solutions
-    can be a very efficient and amazing user experience.
+    collaborative apps. Working together in online apps can be a very efficient 
+    and an amazing user experience.
     
     ---
     
@@ -154,12 +154,7 @@
     
     ---
     
-    ## Code & Demos
-    
-    * Trigger an event from the server
-    * Subscribe to channel & bind to event on the client
-    * Rules for Trigger events from clients
-    * Live user lists (presence)
+    # Code & Demos
     
     ???
     
@@ -304,7 +299,7 @@
     ```
     --
     ```js
-    // Subscribe & Authenticate Channels
+    // Subscribe to channels that require authentication
     // private-
     // presence-
     
@@ -312,9 +307,16 @@
     ```
     --
     ```js
-    // Trigger "client-" prefixed event
+    // Wait for the subscription to succeed
+    channel.bind('pusher:subscription_succeeded', function() {
+    ```
     
-    channel.trigger('client-event', data);
+    --
+    ```js
+      // Trigger "client-" prefixed event
+    
+      channel.trigger('client-event', data);
+    });
     ```
     
     **To trigger events from the client (web | mobile) you need to authenticate the channel subscription from your server**
@@ -328,7 +330,8 @@
     
     1. The channel name must either be prefixed with `private-` or `presence-`
     2. You need to authenticate these subscriptions from your server
-    3. The event name must be prefixed with `client-`
+    3. Trigger events once subscribed
+    4. The event name must be prefixed with `client-`
     
     ---
     
@@ -386,7 +389,7 @@
     }
     
     function memberRemoved(member) {
-      // show the user is online
+      // show the user is offline
     }
     ```
     
