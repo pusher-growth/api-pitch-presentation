@@ -48,26 +48,29 @@
   pitchingChannel.bind('pusher:member_added', addPitcher);
   pitchingChannel.bind('pusher:member_removed', removePitcher);
   
+  function toSafePitcherId(val) {
+    return val.replace(/(\.|<|>)/g, '_');
+  }
+  
   function addPitcher(pitcher) {
-    console.log(pitcher);
     if(!pitcher.info.twitter_id) {
       return;
     }
     
-    var pitcherEl = jQuery('<div class="ball pitcher pitcher_' + pitcher.info.twitter_id + '"><span class="mph"></span></div>');
-    pitcherEl.attr('title', pitcher.info.twitter_id);
-    var url = 'http://avatars.io/twitter/' + pitcher.info.twitter_id;
+    var pitcherEl = jQuery('<div class="ball pitcher pitcher_' + toSafePitcherId(pitcher.info.twitter_id) + '"><span class="mph"></span></div>');
+    pitcherEl.attr('title', toSafePitcherId(pitcher.info.twitter_id));
+    var url = 'http://avatars.io/twitter/' + toSafePitcherId(pitcher.info.twitter_id);
     pitcherEl.css('background-image', 'url(' + url + ')');
     pitchingEl.append(pitcherEl);
   }
   
   function removePitcher(pitcher) {
-    var pitcherEl = jQuery('.pitcher_' + pitcher.info.twitter_id);
+    var pitcherEl = jQuery('.pitcher_' + toSafePitcherId(pitcher.info.twitter_id));
     pitcherEl.remove();
   }
   
   pitchingChannel.bind('client-pitched', function(ev) {
-    var pitcherEl = jQuery('.pitcher_' + ev.twitter_id);
+    var pitcherEl = jQuery('.pitcher_' + toSafePitcherId(ev.twitter_id) );
     var px = (ev.mph*1.5) + 'px';
     pitcherEl.animate({width: px, height: px, 'z-index': ev.mph});
     pitcherEl.find('.mph').text(ev.mph);
