@@ -78,23 +78,11 @@
     class: em-text, bg-cover, trans-h
     background-image: url(img/itv-news-may-2014.png)
     
-    # Notifications & Signalling
+    # Notifications & Activity Streams
     
     ???
     
     Use notifications to let users know the instant something has happened - that new data is available to them.
-    
-    ---
-    
-    class: center, bg-cover, em-text, trans-h, top
-    background-image: url(./img/delighted-app.gif)
-    
-    # Activity Streams
-    
-    ???
-    
-    Activity Streams are used in applications such as Twitter, Facebook and Google+.
-    You can add a streams of real-time status or activity updates.
     
     ---
     
@@ -132,25 +120,12 @@
     class: trans-h, bg-contain
     background-image: url(./img/atom-pair.gif)
     
-    # Multi-User Collaboration
+    # Multi-User Collaboration & Games
     
     ???
     
     If you've used Google Docs then you're familiar with the power of real-time
-    collaborative apps. Working together in online apps can be a very efficient 
-    and an amazing user experience.
-    
-    ---
-    
-    template: lblue
-    class: bg-cover, trans-h
-    background-image: url(./img/quizup.png)
-    
-    # Multiplayer Games
-    
-    ???
-    
-    Pusher is a great fit for real-time multiplayer games.
+    collaborative apps. You can use Pusher to build those types of experiences.
     
     ---
     
@@ -292,46 +267,11 @@
     
     class: code, top, code-reveal
     
-    ## Rules for Trigger events from clients
+    # Rules for Trigger events from clients
     
-    ```js
-    var pusher = new Pusher(KEY);
-    ```
-    --
-    ```js
-    // Subscribe to channels that require authentication
-    // private-
-    // presence-
-    
-    var channel = pusher.subscribe('private-channel-name');
-    ```
-    --
-    ```js
-    // Wait for the subscription to succeed
-    channel.bind('pusher:subscription_succeeded', function() {
-    ```
-    
-    --
-    ```js
-      // Trigger "client-" prefixed event
-    
-      channel.trigger('client-event', data);
-    });
-    ```
-    
-    **To trigger events from the client (web | mobile) you need to authenticate the channel subscription from your server**
-    
-    ???
-    
-    As well as sending events from the server you can trigger events from client apps. 
-    However, you must first authenticate those apps to do so via your server.
-    
-    Three important things to remember
-    
-    1. The channel name must either be prefixed with `private-` or `presence-`
-    2. You need to authenticate these subscriptions from your server
-    3. Trigger events once subscribed
-    4. The event name must be prefixed with `client-`
+    <h2 class="linky">You must authenticate your clients</h2>
+    <h2>Please come see me</h2>
+    <h2 class="linky">pusher.github.io/hackathon/</h2>
     
     ---
     
