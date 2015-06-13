@@ -119,7 +119,7 @@
       
       // Bind to "user" event
       notificationsChannel.bind('user', function(data) {
-        toastr.warning(data.msg, '', {"positionClass": "toast-bottom-right"});
+        toastr.warning(data.msg, '', {"positionClass": "toast-top-right"});
       });
       
       subscribedToNotifications = true;
