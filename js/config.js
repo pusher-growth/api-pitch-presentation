@@ -14,17 +14,22 @@ var CONFIG = {
       name: 'Jamie',
       title: 'Developer',
       twitter_id: '@JamiePatel'
+    },
+    vivan: {
+      name: 'Vivan',
+      title: 'Platform Engineer',
+      twitter_id: '@vivangkumar'
     }
   },
-  
+
   getPitcher: function() {
     return this.pitchers[this.pitching];
   },
-  
+
   // Change presentation config here:
-  pitching: 'leggetter',
-  
-  pitchAppUrl: 'j.mp/yoyo-tokyo',
-  
-  prize: 'Best use of Pusher: GoPros'
+  pitching: 'vivan',
+
+  pitchAppUrl: 'http://bit.ly/1BjV2DY',
+
+  prize: 'Best use of Pusher: Ollies'
 };
