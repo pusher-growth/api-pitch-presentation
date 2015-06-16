@@ -29,7 +29,7 @@ var CONFIG = {
   // Change presentation config here:
   pitching: 'vivan',
 
-  pitchAppUrl: 'http://bit.ly/1BjV2DY',
+  pitchAppUrl: 'http://j.mp/bh-berlin',
 
   prize: 'Best use of Pusher: Ollies'
 };
