@@ -7,7 +7,7 @@ var CONFIG = {
     },
     ham: {
       name: 'Hamilton',
-      title: 'Growth Engineer',
+      title: 'Developer',
       twitter_id: '@hamchapman'
     },
     jam: {
@@ -27,9 +27,9 @@ var CONFIG = {
   },
 
   // Change presentation config here:
-  pitching: 'vivan',
+  pitching: 'ham',
 
-  pitchAppUrl: 'http://j.mp/bh-berlin',
+  pitchAppUrl: 'http://j.mp/geo-ldn',
 
-  prize: 'Best use of Pusher: Ollies'
+  prize: 'Parrot MiniDrones'
 };
