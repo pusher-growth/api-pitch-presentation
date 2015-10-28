@@ -19,7 +19,12 @@ var CONFIG = {
       name: 'Vivan',
       title: 'Platform Engineer',
       twitter_id: '@vivangkumar'
-    }
+    },
+    jack: {
+      name: 'Jack',
+      title: 'Developer Evangelist',
+      twitter_id: '@Jack_Franklin'
+    },
   },
 
   getPitcher: function() {
@@ -27,9 +32,9 @@ var CONFIG = {
   },
 
   // Change presentation config here:
-  pitching: 'ham',
+  pitching: 'jack',
 
-  pitchAppUrl: 'http://j.mp/geo-ldn',
+  pitchAppUrl: 'http://j.mp/yoyo-ldn',
 
   prize: 'Parrot MiniDrones'
 };
