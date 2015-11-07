@@ -36,5 +36,5 @@ var CONFIG = {
 
   pitchAppUrl: 'http://j.mp/yoyo-ldn',
 
-  prize: 'Parrot MiniDrones'
+  prize: 'Star Wars robot things'
 };
